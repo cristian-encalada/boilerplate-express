@@ -1,8 +1,11 @@
+require('dotenv').config();
 let express = require("express");
 let app = express();
 const PORT = 3030;
 console.log("Hello World");
 
+style = process.env.MESSAGE_STYLE;
+message = "Hello json";
 absolutePath = __dirname + "/views/index.html";
 
 // Assets at the /public route
@@ -14,8 +17,12 @@ app.get("/", (req, res) => {
 });
 
 app.get("/json", (req, res) => {
-    // res.send('Hello Express');  Respond with "Hello Express" when a GET request is made to the homepage
-    res.json({"message": "Hello json"}); // Respond with an HTML file
+    if (style === 'uppercase'){
+        res.json({"message": message.toUpperCase()}); 
+    }
+    else {
+        res.json({"message": message}); 
+    }
   });
 
 app.listen(PORT, () => {

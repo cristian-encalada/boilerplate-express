@@ -1,38 +1,20 @@
-let express = require('express');
+let express = require("express");
 let app = express();
+const PORT = process.env.PORT || 3030;
 console.log("Hello World");
-// Respond with "Hello Express" when a GET request is made to the homepage
-app.get('/', (req, res) => {
-    res.send('Hello Express');
-  })
 
+absolutePath = __dirname + "/views/index.html";
 
+// Assets at the /public route
+app.use("/public", express.static(__dirname + "/public"));
 
+app.get("/", (req, res) => {
+  // res.send('Hello Express');  Respond with "Hello Express" when a GET request is made to the homepage
+  res.sendFile(absolutePath); // Respond with an HTML file
+});
 
+app.listen(PORT, () => {
+    console.log(`server started on port ${PORT}`);
+  });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- module.exports = app;
+module.exports = app;

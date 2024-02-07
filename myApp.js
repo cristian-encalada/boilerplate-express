@@ -1,6 +1,6 @@
 let express = require("express");
 let app = express();
-const PORT = process.env.PORT || 3030;
+const PORT = 3030;
 console.log("Hello World");
 
 absolutePath = __dirname + "/views/index.html";

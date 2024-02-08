@@ -2,15 +2,26 @@ require('dotenv').config();
 let express = require("express");
 let app = express();
 const PORT = 3030;
+// [1] Meet the Node console
 console.log("Hello World");
 
-// Assets at the /public route
+// [4] Serve Static Assets
 app.use("/public", express.static(__dirname + "/public"));
 
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/views/index.html");
+// [7] Implement a Root-Level Request Logger Middleware
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path} - ${req.ip}`);
+  next();
 });
 
+// [3] Serve an HTML file
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/views/index.html");
+  // [2] Start a working Express Server
+  // res.send('Hello Express');
+});
+
+// [6] Serve JSON on a Specific Route
 app.get("/json", (req, res) => {
     const json = { message: "Hello json" };
     json.message = process.env.MESSAGE_STYLE === "uppercase" ? json.message.toUpperCase() : json.message;

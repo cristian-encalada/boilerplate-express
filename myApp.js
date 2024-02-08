@@ -4,10 +4,6 @@ let app = express();
 const PORT = 3030;
 console.log("Hello World");
 
-const defaultMessage = "Hello json";
-const style = process.env.MESSAGE_STYLE || 'uppercase';
-const message = (style === 'uppercase') ? defaultMessage.toUpperCase() : defaultMessage;
-
 // Assets at the /public route
 app.use("/public", express.static(__dirname + "/public"));
 
@@ -16,7 +12,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/json", (req, res) => {
-    res.json({"message": message});
+    const json = { message: "Hello json" };
+    json.message = process.env.MESSAGE_STYLE === "uppercase" ? json.message.toUpperCase() : json.message;
+    res.json(json);
 });
 
 app.listen(PORT, () => {

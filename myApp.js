@@ -37,6 +37,13 @@ app.get('/now', function(req, res, next) {
   res.json({time: req.time});
 });
 
+
+// [9] Get Route Parameter Input from the Client
+app.get("/:anyWord/echo", (req, res) => {
+  const json = req.params.anyWord;
+  res.json({ echo: json });
+});
+
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
 });

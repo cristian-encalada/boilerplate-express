@@ -50,14 +50,22 @@ app.get("/:anyWord/echo", (req, res) => {
 });
 
 // [10] Get Query Parameter Input from the Client
-app.get("/name", (req, res) => {
+app.route("/name")
+  .get((req, res) => {
   const firstName = req.query.first;
   const lastName = req.query.last;
   res.json({ 
     name : `${firstName} ${lastName}`
    });
+})
+  // [12] Get Data from POST Requests
+  .post((req, res) => {
+  const firstName = req.body.first;
+  const lastName = req.body.last;
+  res.json({ 
+    name : `${firstName} ${lastName}`
+   });
 });
-
 
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);

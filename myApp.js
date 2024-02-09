@@ -44,6 +44,16 @@ app.get("/:anyWord/echo", (req, res) => {
   res.json({ echo: json });
 });
 
+// [10] Get Query Parameter Input from the Client
+app.get("/name", (req, res) => {
+  const firstName = req.query.first;
+  const lastName = req.query.last;
+  res.json({ 
+    name : `${firstName} ${lastName}`
+   });
+});
+
+
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
 });

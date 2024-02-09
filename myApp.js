@@ -28,6 +28,15 @@ app.get("/json", (req, res) => {
     res.json(json);
 });
 
+
+// [8] Chain Middleware to Create a Time Server
+app.get('/now', function(req, res, next) {
+  req.time = new Date().toString();
+  next();
+}, function(req, res) {
+  res.json({time: req.time});
+});
+
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
 });

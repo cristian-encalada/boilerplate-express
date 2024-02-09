@@ -1,4 +1,5 @@
 require('dotenv').config();
+const bodyParser = require("body-parser");
 let express = require("express");
 let app = express();
 const PORT = 3030;
@@ -13,6 +14,10 @@ app.use((req, res, next) => {
   console.log(`${req.method} ${req.path} - ${req.ip}`);
   next();
 });
+
+// [11] Use body-parser to Parse POST Requests
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // [3] Serve an HTML file
 app.get("/", (req, res) => {
